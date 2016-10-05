@@ -4,7 +4,7 @@
 
 1) get repo
 
-2) under src dir run 'npm install' and 'bower install'
+2) under source dir run 'npm install' and 'bower install'
 
 3) then run bower task to run dev version with live reload 'gulp start'
 

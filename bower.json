@@ -4,8 +4,6 @@
   "dependencies": {
     "lodash": "~4.16.2",
     "bootstrap": "~3.3.7",
-    "font-awesome": "~4.6.3",
-    "modernizr": "./bower/custom/modernizr/modernizr-2.6.2.min.js",
     "wow": "wowjs#~1.1.2",
     "angular": "~1.5.8",
     "angular-scroll": "~1.0.0"
