@@ -1,0 +1,6 @@
+mixin edit(edit, model, placeholder)
+    form.form-inline.input-group(ng-if=edit, name="form")
+        input.form-control(type='text', placeholder=placeholder, ng-model=model)
+        .input-group-addon(ng-click="update(message)", ng-show=model)
+            span.glyphicon.glyphicon-ok(style="float:right")
+        .input-group-addon(ng-hide=model)

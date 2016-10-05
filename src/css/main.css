@@ -1,0 +1,19 @@
+.jumbotron > ul.list-group {
+  height:auto;
+  overflow-x:auto;
+  max-height:500px;
+  min-height:500px;
+}
+
+.jumbotron > ul > li > .menu {
+  float: right;
+}
+
+
+.jumbotron > ul > li > div > span.glyphicon.glyphicon-arrow-down {
+  padding-right:10px;
+}
+
+.jumbotron > ul > li > div > span.glyphicon.glyphicon-arrow-up {
+  padding-right:10px;
+}

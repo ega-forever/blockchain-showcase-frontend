@@ -1,0 +1,53 @@
+include partials/mixins
+
+
+doctype html
+html.no-js(ng-app="app")
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title Chat
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='libs/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='libs/font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet', href='css/main.css')
+
+    // Js
+    script(src='libs/jquery/dist/jquery.min.js')
+    script(src='libs/bootstrap/dist/js/bootstrap.min.js')
+    script(src='libs/angular/angular.min.js')
+    script(src='libs/lodash/dist/lodash.js')
+    script(src='js/controllers.js')
+    script(src='js/services.js')
+    script(src='js/app.js')
+  body
+    .container
+      .header.clearfix
+        h3.text-muted #Chat
+      .jumbotron(ng-controller="chatCtrl")
+        ul.list-group
+          li.list-group-item(ng-repeat="message in messages track by $index")
+            span(ng-dblclick="message.edit.header = true", ng-if="!message.edit.header") # {{$index + 1}}  {{message.header}}
+            +edit('message.edit.header', 'message.header', 'header')
+            .menu(ng-if="!message.edit.header")
+              span.glyphicon.glyphicon-arrow-down(ng-click="message.show = true;get(message)", ng-if="!message.show", style="padding-right:10px")
+              span.glyphicon.glyphicon-arrow-up(ng-click="message.show = false", ng-if="message.show", style="padding-right:10px")
+              span.glyphicon.glyphicon-remove(ng-click="pull(message)")
+
+            div(ng-if="message.show")
+              hr
+              span(ng-dblclick="message.edit.body = true", ng-if="!message.edit.body") message:&nbsp
+              span(ng-if="message.body") {{message.body}}
+              span(ng-if="!message.body").glyphicon.glyphicon-time
+              +edit('message.edit.body', 'message.body', 'message')
+
+
+        form.form-inline(name="form")
+          .form-group
+            input.form-control(type='text', placeholder='header', ng-model="newMessage.header", required)
+          .form-group
+            input.form-control(type='text', placeholder='message', ng-model="newMessage.message", required)
+          button.btn.btn-default(type='submit', ng-click="push()" ng-disabled="form.$invalid") Send
+
+
