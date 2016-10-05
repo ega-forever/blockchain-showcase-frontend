@@ -7,25 +7,35 @@ angular.module('controllers', ['services'])
     restFactory.getCollection().then(function (data) {
       $scope.messages = data.data;
       setInterval(function () {
+
+        if (_.find($scope.messages, {edit: {header: true}})) {
+          return;
+        }
         restFactory.getCollection().then(function (data) {
-          $scope.messages = data.data
+          if (!_.chain($scope.messages).differenceWith(data.data, function (x, y) {
+              return x._id == y._id && x.header == y.header;
+            }).isEmpty().value()) {
+            $scope.messages = data.data;
+          }
         });
-      }, 3000);
+      }, 1000);
     });
 
 
     $scope.get = function (message) {
-      if (message.body) {
-        return;
-      }
       restFactory.getBody(message._id).then(function (data) {
         _.merge(message, {body: data.data.body});
       })
     };
 
     $scope.push = function () {
-      $scope.messages.push(Object.create($scope.newMessage));
-      $scope.newMessage = {};
+      restFactory.add($scope.newMessage)
+        .then(function () {
+          $scope.messages.push(Object.create($scope.newMessage));
+          $scope.newMessage = {};
+
+        })
+
     };
 
     $scope.pull = function (message) {

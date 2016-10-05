@@ -29,6 +29,13 @@ angular.module('services', [])
           headers: {"Content-Type": "application/json;charset=utf-8"},
           data: {_id: id}
         })
+      },
+      add: function(message){
+        return $http({
+          method: 'POST',
+          url: 'api/messages',
+          data: message
+        })
       }
     }
 

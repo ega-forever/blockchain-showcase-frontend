@@ -46,7 +46,7 @@ html.no-js(ng-app="app")
           .form-group
             input.form-control(type='text', placeholder='header', ng-model="newMessage.header", required)
           .form-group
-            input.form-control(type='text', placeholder='message', ng-model="newMessage.message", required)
+            input.form-control(type='text', placeholder='message', ng-model="newMessage.body", required)
           button.btn.btn-default(type='submit', ng-click="push()" ng-disabled="form.$invalid") Send
 
 
